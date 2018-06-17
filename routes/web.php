@@ -11,6 +11,9 @@
 |
 */
 
+Route::get("teste1",'testeImagemController@teste1');
+Route::post("teste1",'testeImagemController@teste1Post');
+
 Route::get('/addregistros', function () {
 
   $zero  = App\Categoria::create(['titulo'=>'Zero KM']);
