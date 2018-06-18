@@ -12,8 +12,13 @@ class testeImagemController extends Controller
 
     public function teste1Post(Request $request) {
         if($request->hasFile('imagem')) {
-            dd("-------- Entrou --------");
+            // $imagem = $request->file('imagem');
+            $imagem = $request->imagem;
+            $imagem_nome = time().$imagem->getClientOriginalName();
+            $imagem->move("imagem/",$imagem_nome);
+
+            dd($imagem_nome);
         }
-        return "Olá sou o #aiquefome";
+        return "Olá sou o #zeponisolucoes";
     }
 }
