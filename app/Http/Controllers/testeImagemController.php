@@ -14,6 +14,9 @@ class testeImagemController extends Controller
 
         $this->validate($request,[
             "imagem"=>"required|image|dimensions:min_width=600,min_height=600"
+        ],[
+            "imagem.required"=>"Preencha uma imagem",
+            "imagem.image"=>"Preencha uma imagem válida",
         ]);
 
         if($request->hasFile('imagem')) {
