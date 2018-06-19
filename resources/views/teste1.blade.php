@@ -3,6 +3,22 @@
 @section('content')
 
 <div class="container">
+
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col s12">
+                <div class="card red darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Erros</span>
+                        @foreach ($errors->all() as $message)
+                            <li>{{$message}}</li>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <h3>Teste1</h3>
         <form action="teste1" method="post" enctype="multipart/form-data">
