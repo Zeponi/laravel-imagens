@@ -29,8 +29,26 @@ class testeImagemController extends Controller
             $image = Image::make('imagem/'.$imagem_nome)->fit(1200, 600)->brightness(-20)->save("imagem/slide3_".$imagem_nome);
             $image = Image::make('imagem/'.$imagem_nome)->fit(400, 400)->save("imagem/pequena_".$imagem_nome);
             $image = Image::make('imagem/'.$imagem_nome)->fit(600, 400)->save("imagem/galeria".$imagem_nome);
-        
+
         }
+        return "Olá sou o #zeponisolucoes";
+    }
+
+    public function teste2() {
+
+        return view("teste2");
+    }
+
+    public function teste2Post(Request $request) {
+
+        if($request->hasFile('imagens')) {
+            $imagens = $request->imagens;
+            foreach ($imagens as $imagem) {
+                $imagem_nome = time().$imagem->getClientOriginalName();
+                $imagem->move("multiplas/",$imagem_nome);
+            }
+        }
+
         return "Olá sou o #zeponisolucoes";
     }
 }
