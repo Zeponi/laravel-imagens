@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Validator;
 
 class testeImagemController extends Controller
 {
@@ -43,6 +44,19 @@ class testeImagemController extends Controller
 
         if($request->hasFile('imagens')) {
             $imagens = $request->imagens;
+
+            $imagensRegras = array(
+                "imagem"=>"required|image|dimensions:min_width=600,min_height=600",
+            );
+
+            foreach ($imagens as $imagem) {
+                $imagemArray = array('imagem' => $imagem);
+                $imageValidator = Validator::make($imagemArray, $imagensRegras);
+                if($imageValidator->fails()) {
+                    return redirect('teste2')->withErrors($imageValidator)->withInput();
+                }
+            }
+
             foreach ($imagens as $imagem) {
                 $imagem_nome = time().$imagem->getClientOriginalName();
                 $imagem->move("multiplas/",$imagem_nome);
